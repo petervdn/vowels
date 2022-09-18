@@ -38,7 +38,7 @@ function App() {
 
   const onChordClick = (chord: Chord) => {
     if (choir) {
-      progressToChord(choir, chord, [0.2, 0.5], 0.3);
+      progressToChord(choir, chord, [0.2, 0.3], 0.3);
     }
   };
 

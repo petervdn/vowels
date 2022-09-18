@@ -8,7 +8,7 @@ export const createFormantFilter = (
   const inGain = context.createGain();
   const outGain = context.createGain();
 
-  const filters = initialVowel.formants.map(({ frequency }) => {
+  initialVowel.formants.map(({ frequency }) => {
     const filter = context.createBiquadFilter();
     filter.frequency.value = frequency;
     filter.type = "bandpass";

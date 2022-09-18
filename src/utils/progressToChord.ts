@@ -23,13 +23,13 @@ export const progressToChord = (
       const noteNumber = chord[index];
       let octaveShift = 0;
       if (Math.random() < octaveShiftChance) {
-        octaveShift = Math.random() > 0.5 ? 1 : -1;
+        octaveShift = -1; //Math.random() > 0.5 ? 1 : -1;
       }
-      tweenAudioParam(
-        voice.oscillator.frequency,
-        midiToFrequency(noteNumber + octaveShift * 12),
-        duration
-      );
+      const octaveShiftedNoteNumber = noteNumber + octaveShift * 12;
+      const frequency =
+        midiToFrequency(octaveShiftedNoteNumber) * (1 + Math.random() * 0.01);
+
+      tweenAudioParam(voice.oscillator.frequency, frequency, duration);
     });
   }
 };

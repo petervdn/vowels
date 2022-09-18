@@ -22,4 +22,11 @@ export const vowels: Array<Vowel> = [
       { frequency: 2400, amplitude: 1 },
     ],
   },
+  {
+    name: "o",
+    formants: [
+      { frequency: 360, amplitude: 1 },
+      { frequency: 640, amplitude: 1 },
+    ],
+  },
 ];

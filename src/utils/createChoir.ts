@@ -12,12 +12,12 @@ export const createChoir = (
   mainGain.connect(context.destination);
 
   // use first chord to create voices per note
-  const voices: Array<Voice> = initialChord.map((noteNumber) => {
+  const voices: Array<Voice> = initialChord.map((noteNumber, index) => {
     const oscillator = context.createOscillator();
     const oscillatorGain = context.createGain();
 
-    const vowel = vowels[0];
-    const formantFilter = createFormantFilter(context, 12, vowel);
+    const vowel = vowels[index];
+    const formantFilter = createFormantFilter(context, 33, vowel);
 
     oscillator.type = "sawtooth";
     oscillator.frequency.value = midiToFrequency(noteNumber);
