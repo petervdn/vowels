@@ -1,23 +1,23 @@
 import { ChordView } from "./ChordView";
 import React from "react";
-import { Voices } from "../utils/types";
 import { progressToChord } from "../utils/progressToChord";
+import { Choir } from "../utils/types";
 
 type Props = {
-  voices: Voices | undefined;
+  choir: Choir | undefined;
 };
 
-export const VoicesView = ({ voices }: Props) => {
+export const ChoirView = ({ choir }: Props) => {
   const onChordClick = (chordIndex: number) => {
-    if (voices) {
-      progressToChord(voices, chordIndex, [0.2, 0.5], 0.3);
+    if (choir) {
+      progressToChord(choir, chordIndex, [0.2, 0.5], 0.3);
     }
   };
   return (
     <div>
-      <h2>Voices</h2>
-      {voices &&
-        voices.chords.map((chord, index) => (
+      <h2>Choir</h2>
+      {choir &&
+        choir.chords.map((chord, index) => (
           <ChordView
             key={index}
             chord={chord}

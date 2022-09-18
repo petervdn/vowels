@@ -1,9 +1,11 @@
+import { AudioChain } from "./types";
+
 export const createFilterChain = (
   context: AudioContext,
   amount: number,
   frequency: number,
   resonance: number
-) => {
+): AudioChain => {
   if (!amount) {
     throw new Error("Can not create filter chain with 0 filters");
   }

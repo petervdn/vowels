@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Voices } from "./utils/types";
-import { createVoices } from "./utils/createVoices";
 import { Vowels } from "./components/Vowels";
-import { VoicesView } from "./components/VoicesView";
+import { createChoir } from "./utils/createChoir";
+import { ChoirView } from "./components/ChoirView";
+import { Choir } from "./utils/types";
 
 const context = new AudioContext();
 const progression = [
@@ -13,23 +13,23 @@ const progression = [
 ];
 
 function App() {
-  const [voices, setVoices] = useState<Voices>();
+  const [choir, setChoir] = useState<Choir>();
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {}, []);
 
   const start = () => {
-    if (!voices) {
-      setVoices(createVoices(context, progression));
+    if (!choir) {
+      setChoir(createChoir(context, progression));
     } else if (!isPlaying) {
-      voices.gain.gain.value = 1;
+      choir.gain.gain.value = 1;
     }
     setIsPlaying(true);
   };
 
   const stop = () => {
-    if (voices && isPlaying) {
-      voices.gain.gain.value = 0;
+    if (choir && isPlaying) {
+      choir.gain.gain.value = 0;
       setIsPlaying(false);
     }
   };
@@ -42,7 +42,7 @@ function App() {
           {isPlaying ? "stop" : "start"}
         </button>
         <Vowels />
-        <VoicesView voices={voices} />
+        <ChoirView choir={choir} />
       </div>
     </>
   );
