@@ -1,10 +1,17 @@
-import { midiToFrequency } from "./midiToFrequency";
-
 export type Chord = Array<number>;
-export type ChordProgression = Array<Chord>;
 
 export type Voices = {
-  progression: ChordProgression;
+  chords: Array<Chord>;
   oscillators: Array<OscillatorNode>;
   gain: GainNode;
+};
+
+export type Vowel = {
+  name: string;
+  formants: Array<Formant>;
+};
+
+export type Formant = {
+  frequency: number;
+  amplitude: number;
 };

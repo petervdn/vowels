@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Voices } from "./utils/types";
 import { createVoices } from "./utils/createVoices";
-import { progressToChord } from "./utils/progressToChord";
+import { Vowels } from "./components/Vowels";
+import { VoicesView } from "./components/VoicesView";
 
 const context = new AudioContext();
 const progression = [
-  [60, 63, 67],
-  [62, 65, 69],
+  [60 - 12, 60, 63, 67],
+  [62 - 12, 62, 65, 69],
+  [67 - 12, 62, 67, 71],
 ];
 
 function App() {
@@ -32,31 +34,15 @@ function App() {
     }
   };
 
-  const onProgressClick = (chordIndex: number) => {
-    if (voices) {
-      progressToChord(voices, chordIndex);
-    }
-  };
-
   return (
     <>
       <h1>Vowels</h1>
-
       <div>
         <button onClick={() => (isPlaying ? stop() : start())}>
           {isPlaying ? "stop" : "start"}
         </button>
-        <div>
-          {voices &&
-            voices.progression.map((chord, index) => {
-              const label = JSON.stringify(chord);
-              return (
-                <button key={label} onClick={() => onProgressClick(index)}>
-                  {label}
-                </button>
-              );
-            })}
-        </div>
+        <Vowels />
+        <VoicesView voices={voices} />
       </div>
     </>
   );
