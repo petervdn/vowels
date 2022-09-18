@@ -1,14 +1,10 @@
 import { AudioChain, Vowel } from "./types";
 
-export type FormantFilter = {
-  vowel: Vowel;
-} & AudioChain;
-
 export const createFormantFilter = (
   context: AudioContext,
   resonance: number,
   initialVowel: Vowel
-): FormantFilter => {
+): AudioChain => {
   const inGain = context.createGain();
   const outGain = context.createGain();
 
@@ -23,7 +19,6 @@ export const createFormantFilter = (
   });
 
   return {
-    vowel: initialVowel,
     input: inGain,
     output: outGain,
   };

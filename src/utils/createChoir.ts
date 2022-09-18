@@ -5,24 +5,19 @@ import { vowels } from "../data/vowels";
 
 export const createChoir = (
   context: AudioContext,
-  chords: Array<Chord>
+  initialChord: Chord
 ): Choir => {
   const mainGain = context.createGain();
   mainGain.gain.value = 1;
   mainGain.connect(context.destination);
 
-  chords.forEach((chord) => {
-    if (chord.length !== chords[0].length) {
-      throw new Error("All chords must be of equal length");
-    }
-  });
-
   // use first chord to create voices per note
-  const voices: Array<Voice> = chords[0].map((noteNumber) => {
+  const voices: Array<Voice> = initialChord.map((noteNumber) => {
     const oscillator = context.createOscillator();
     const oscillatorGain = context.createGain();
 
-    const formantFilter = createFormantFilter(context, 12, vowels[2]);
+    const vowel = vowels[0];
+    const formantFilter = createFormantFilter(context, 12, vowel);
 
     oscillator.type = "sawtooth";
     oscillator.frequency.value = midiToFrequency(noteNumber);
@@ -35,11 +30,10 @@ export const createChoir = (
 
     oscillator.start(0);
 
-    return { oscillator, formantFilter };
+    return { oscillator, formantFilter, vowel };
   });
 
   return {
-    chords,
     voices,
     gain: mainGain,
   };

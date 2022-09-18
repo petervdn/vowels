@@ -6,7 +6,7 @@ type Props = {
   onClick: () => void;
 };
 
-export const ChordView = ({ chord, onClick }: Props) => {
+export const ChordListItem = ({ chord, onClick }: Props) => {
   const label = JSON.stringify(chord);
   return (
     <button key={label} onClick={onClick}>

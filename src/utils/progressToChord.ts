@@ -1,6 +1,6 @@
 import { tweenAudioParam } from "./tweenAudioParam";
 import { midiToFrequency } from "./midiToFrequency";
-import { Choir } from "./types";
+import { Choir, Chord } from "./types";
 
 const randomInRange = (min: number, max: number) => {
   const range = Math.random() * (max - min);
@@ -8,12 +8,11 @@ const randomInRange = (min: number, max: number) => {
 };
 
 export const progressToChord = (
-  { chords, voices }: Choir,
-  toIndex: number,
+  { voices }: Choir,
+  chord: Chord,
   tweenDuration: number | [number, number],
   octaveShiftChance = 0
 ) => {
-  const chord = chords[toIndex];
   let duration =
     typeof tweenDuration === "number"
       ? tweenDuration

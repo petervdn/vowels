@@ -1,16 +1,14 @@
-import { FormantFilter } from "./createFormantFilter";
-
 export type Chord = Array<number>;
 
 export type Choir = {
-  chords: Array<Chord>;
   voices: Array<Voice>;
   gain: GainNode;
 };
 
 export type Voice = {
   oscillator: OscillatorNode;
-  formantFilter: FormantFilter;
+  formantFilter: AudioChain;
+  vowel: Vowel;
 };
 
 export type AudioChain = {

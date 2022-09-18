@@ -3,10 +3,12 @@ import "./App.css";
 import { Vowels } from "./components/Vowels";
 import { createChoir } from "./utils/createChoir";
 import { ChoirView } from "./components/ChoirView";
-import { Choir } from "./utils/types";
+import { Choir, Chord } from "./utils/types";
+import { ChordList } from "./components/ChordList";
+import { progressToChord } from "./utils/progressToChord";
 
 const context = new AudioContext();
-const progression = [
+const chords: Array<Chord> = [
   [60 - 12, 60, 63, 67],
   [62 - 12, 62, 65, 69],
   [67 - 12, 62, 67, 71],
@@ -20,7 +22,7 @@ function App() {
 
   const start = () => {
     if (!choir) {
-      setChoir(createChoir(context, progression));
+      setChoir(createChoir(context, chords[0]));
     } else if (!isPlaying) {
       choir.gain.gain.value = 1;
     }
@@ -34,6 +36,12 @@ function App() {
     }
   };
 
+  const onChordClick = (chord: Chord) => {
+    if (choir) {
+      progressToChord(choir, chord, [0.2, 0.5], 0.3);
+    }
+  };
+
   return (
     <>
       <h1>Vowels</h1>
@@ -42,6 +50,7 @@ function App() {
           {isPlaying ? "stop" : "start"}
         </button>
         <Vowels />
+        <ChordList chords={chords} onChordClick={onChordClick} />
         <ChoirView choir={choir} />
       </div>
     </>
